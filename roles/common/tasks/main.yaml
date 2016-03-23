@@ -1,0 +1,39 @@
+- name: Create stack user
+  user: name=stack
+        state=present
+        password="stck4/10"
+  sudo: yes
+
+- name: Add stack to sudoers
+  shell: echo "stack ALL=(root) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/stack && sudo chmod 0440 /etc/sudoers.d/stack
+  args:
+    creates: /etc/sudoers.d/stack
+  sudo: yes
+
+- name: Install git
+  yum: name=git state=latest
+  sudo: yes
+
+- name: Install iptables
+  yum: name=iptables state=latest
+  sudo: yes
+
+- name: Install iptables-services
+  yum: name=iptables-services state=latest
+  sudo: yes
+
+- name: Start iptables
+  service: name=iptables enabled=yes state=started
+  sudo: yes
+
+- name: Install epel-release
+  yum: name=epel-release state=latest
+  sudo: yes
+
+- name: Install pip
+  yum: name=python-pip state=latest
+  sudo: yes
+
+- name: Install tox
+  pip: name=tox
+  sudo: yes

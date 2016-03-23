@@ -1,0 +1,44 @@
+- name: Enable Delorean Repository
+  script: ../files/enable_repositories.sh creates=/etc/yum.repos.d/delorean-deps.repo
+  sudo: yes
+
+- name: Install yum-plugin-priorities package
+  yum: name=yum-plugin-priorities state=latest
+  sudo: yes
+
+- name: Install python-tripleoclient
+  yum: name=python-tripleoclient state=latest
+  sudo: yes
+
+- name: Find stackrc
+  stat: path=/home/stack/stackrc
+  register: stackrc
+  become: yes
+  become_user: stack
+
+- name: Install undercloud (this will take a while!)
+  shell: openstack undercloud install
+  when: stackrc.stat.exists == false
+  become: yes
+  become_user: stack
+
+- name: Set cors allowed_origin in /etc/keystone/keystone.conf
+  ini_file: dest="/etc/keystone/keystone.conf" section=cors option=allowed_origin value=* backup=yes
+  sudo: yes
+
+- name: Restart httpd
+  service: name=httpd state=restarted
+  sudo: yes
+
+- name: Set cors allowed_origin in /etc/ironic/ironic.conf
+  ini_file: dest="/etc/ironic/ironic.conf" section=cors option=allowed_origin value=* backup=yes
+  sudo: yes
+
+- name: Set cors allow_headers in /etc/ironic/ironic.conf
+  ini_file: dest="/etc/ironic/ironic.conf" section=cors option=allow_headers value=Content-Type,Cache-Control,Content-Language,Expires,Last-Modified,Pragma,X-Auth-Token
+  sudo: yes
+
+- name: Restart ironic api 
+  service: name=openstack-ironic-api state=restarted
+  sudo: yes
+  ignore_errors: yes

@@ -1,0 +1,14 @@
+- name: Clone tripleo-common repository
+  git: repo=https://git.openstack.org/openstack/tripleo-common
+       dest={{ tripleo_common_directory }}
+       update=no
+  become: yes
+  become_user: stack
+
+- name: Checkout patch 256384/19
+  shell: git fetch https://review.openstack.org/openstack/tripleo-common refs/changes/84/256384/19 && git checkout FETCH_HEAD
+  args:
+    chdir: "{{ tripleo_common_directory }}"
+    creates: "{{ tripleo_common_directory }}/etc/tripleo/tripleo.conf.sample"
+  become: yes
+  become_user: stack

@@ -1,0 +1,15 @@
+- name: Check firewall status for port 8585
+  shell: grep 8585 /etc/sysconfig/iptables | wc -l
+  sudo: yes
+  register: iptables_tripleo_port
+  ignore_errors: True
+
+- name: Open port 8585 in firewall
+  shell: iptables -A INPUT -p tcp -m tcp --dport 8585 -j ACCEPT && iptables-save > /etc/sysconfig/iptables
+  sudo: yes
+  when: iptables_tripleo_port.stdout == "0"
+
+- name: Restart iptables
+  service:  name=iptables state=restarted
+  sudo: yes
+  when: iptables_tripleo_port.stdout == "0"

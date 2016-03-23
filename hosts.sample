@@ -1,0 +1,9 @@
+[undercloud]
+<instack-ip>  ansible_ssh_user=<instack-user>    ansible_ssh_port=21    ansible_ssh_private_key_file=<path-to-private-key>
+
+[undercloud:vars]
+# Destination directory of the tripleo-common repository.
+tripleo_common_directory=/home/stack/tripleo-common
+
+# Destination directory of the tripleo-ui repository.
+tripleo_ui_directory=/home/stack/tripleo-ui

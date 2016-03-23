@@ -1,0 +1,7 @@
+- name: Install and set up tripleo-common
+  hosts: undercloud
+
+  roles:
+    - tripleo-common
+    - validations
+    - tripleo-ui

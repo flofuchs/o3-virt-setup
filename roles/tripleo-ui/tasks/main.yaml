@@ -1,0 +1,47 @@
+- name: Clone tripleo-ui repository
+  git: repo=https://github.com/openstack/tripleo-ui.git
+       dest=/home/stack/tripleo-ui
+       update=no
+  become: yes
+  become_user: stack
+
+- name: Install nodejs
+  yum: name=nodejs state=latest
+  sudo: yes
+
+- name: Install npm
+  yum: name=npm state=latest
+  sudo: yes
+
+- name: Install gcc
+  yum: name=gcc state=latest
+  sudo: yes
+
+- name: Install make
+  yum: name=make state=latest
+  sudo: yes
+
+- name: Install gulp
+  npm: name=gulp global=yes
+  sudo: yes
+
+- name: Install dependencies
+  npm: path=/home/stack/tripleo-ui
+  become: yes
+  become_user: stack
+
+- name: Check firewall status for port 3000
+  shell: grep 3000 /etc/sysconfig/iptables | wc -l
+  sudo: yes
+  register: iptables_tripleo_ui
+  ignore_errors: True
+
+- name: Open port 3000 in firewall
+  shell: iptables -A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT && iptables-save > /etc/sysconfig/iptables
+  sudo: yes
+  when: iptables_tripleo_ui.stdout == "0"
+
+- name: Restart iptables
+  service:  name=iptables state=restarted
+  sudo: yes
+  when: iptables_tripleo_ui.stdout == "0"

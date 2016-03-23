@@ -1,0 +1,27 @@
+- name: Clone validations repository
+  git: repo=https://github.com/rthallisey/clapper.git
+       dest=/home/stack/clapper
+       update=no
+  become: yes
+  become_user: stack
+
+- name: Install requirements
+  pip: requirements=/home/stack/clapper/ansible-tests/requirements.txt virtualenv=/home/stack/clapper/ansible-tests/.venv
+  become: yes
+  become_user: stack
+
+- name: Check firewall status for port 5001
+  shell: grep 5001 /etc/sysconfig/iptables | wc -l
+  sudo: yes
+  register: iptables_validations_api
+  ignore_errors: True
+
+- name: Open port 5001 in firewall
+  shell: iptables -A INPUT -p tcp -m tcp --dport 5001 -j ACCEPT && iptables-save > /etc/sysconfig/iptables
+  sudo: yes
+  when: iptables_validations_api.stdout == "0"
+
+- name: Restart iptables
+  service:  name=iptables state=restarted
+  sudo: yes
+  when: iptables_validations_api.stdout == "0"
