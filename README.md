@@ -1,8 +1,8 @@
 # o3-virt-setup
 
 This playbook intends to facilitate the installation of a couple of
-TripleO components which are currently under development in a virtual
-environment.
+TripleO components which are currently under development on an
+instack/undercloud node.
 
 
 ## Prerequsites
