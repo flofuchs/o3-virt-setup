@@ -1,5 +1,14 @@
 # o3-virt-setup
 
+This playbook intends to facilitate installation of a couple of TripleO
+components which are currently under development in a virtual
+environment.
+
+
+## Prerequsites
+
+This playbook has been tested on CentOS with CentOS as the instack node
+OS.
 
 ## Features
 
@@ -24,7 +33,8 @@ Make sure you have your virtual environment set up:
 
 http://docs.openstack.org/developer/tripleo-docs/environments/environments.html#virtual-environment
 
-Don't proceed with "Installing the undercloud" as it is included in the playbook.
+Don't proceed with "Installing the undercloud" as it is included in the
+playbook.
 
 Depending on your machine, the whole playbook takes a while to complete.
 So don't worry if there is no progress for a couple of minutes.
