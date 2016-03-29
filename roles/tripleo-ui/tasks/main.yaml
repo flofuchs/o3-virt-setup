@@ -25,7 +25,7 @@
   npm: name=gulp global=yes
   sudo: yes
 
-- name: Install dependencies
+- name: Install dependencies (This may take a while!)
   npm: path=/home/stack/tripleo-ui
   become: yes
   become_user: stack
