@@ -25,6 +25,7 @@ OS.
 
 - Add Mistral setup
 - Add Zaqar setup
+- Start APIs in screen or tmux sessions
 
 
 ## Setup
@@ -45,7 +46,7 @@ Install Ansible:
     sudo yum -y install ansible
 ```
 
-Please do the following steps as the `stack` user on your host machine.
+Please do the following steps as the `stack` user on your **host** machine.
 
 Check out this repository and create a hosts file:
 
@@ -55,7 +56,8 @@ Check out this repository and create a hosts file:
     cp hosts.sample hosts
 ```
 
-In hosts add the correct values to the [undercloud] section, similar to this:
+In the `hosts` file add the correct values to the [undercloud] section,
+similar to this:
 
 ```
 <instack-ip>  ansible_ssh_user=root    ansible_ssh_private_key_file=/home/stack/.ssh/id_rsa
@@ -67,3 +69,29 @@ Run the playbook:
     ansible-playbook -i hosts site.yaml
 ```
 
+After the playbook run has completed, log into you undercloud and start
+the services (as the `stack` user). You're going to need three terminal
+windows, so it's advisable (but not required) to use tmux or screen.
+
+Run the tripleo API:
+
+```
+cd ~/tripleo-common
+tox -e venv  # Ignore errors
+source .tox/venv/bin/activate
+tripleo-api --config-file tripleo.conf
+```
+
+Run the validations API:
+```
+cd ~/clapper/ansible-tests
+source .venv/bin/activate
+source ~/stackrc
+./validation-api.py
+```
+
+Run the UI:
+```
+cd ~/tripleo-ui
+gulp
+```
