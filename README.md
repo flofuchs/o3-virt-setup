@@ -20,7 +20,14 @@
 
 ## Setup
 
-Depending on your machine, the whole setup takes between 
+Make sure you have your virtual environment set up:
+
+http://docs.openstack.org/developer/tripleo-docs/environments/environments.html#virtual-environment
+
+Don't proceed with "Installing the undercloud" as it is included in the playbook.
+
+Depending on your machine, the whole playbook takes a while to complete.
+So don't worry if there is no progress for a couple of minutes.
 
 Install Ansible:
 
