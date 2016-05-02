@@ -5,7 +5,7 @@ TripleO components which are currently under development on an
 instack/undercloud node.
 
 
-## Prerequsites
+## Prerequisites
 
 This playbook has been tested on CentOS with CentOS as the instack node
 OS.
@@ -13,8 +13,8 @@ OS.
 ## Features
 
 - Installs a set of common packages
-- Makes sure the `stack` user exists 
-- Sets up tripleo-common including the temporary/unmerged tripleo-api patch 
+- Makes sure the `stack` user exists
+- Sets up tripleo-common including the temporary/unmerged tripleo-api patch
 - Sets up the validations API
 - Sets up tripleo-ui
 - Adds cors settings for keystone and ironic
