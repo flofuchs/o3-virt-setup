@@ -5,6 +5,11 @@
   become: yes
   become_user: stack
 
+- name: Update pip
+  pip: name=pip state=latest virtualenv=/home/stack/clapper/ansible-tests/.venv
+  become: yes
+  become_user: stack
+
 - name: Install requirements
   pip: requirements=/home/stack/clapper/ansible-tests/requirements.txt virtualenv=/home/stack/clapper/ansible-tests/.venv
   become: yes
