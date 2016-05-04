@@ -42,3 +42,11 @@
   service: name=openstack-ironic-api state=restarted
   sudo: yes
   ignore_errors: yes
+  
+- name: Set cors allowed_origin in /etc/heat/heat.conf
+  ini_file: dest="/etc/heat/heat.conf" section=cors option=allowed_origin value=* backup=yes
+  sudo: yes
+  
+- name: Restart heat api 
+  service: name=openstack-heat-api state=restarted
+  sudo: yes
