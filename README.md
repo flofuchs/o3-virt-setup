@@ -77,9 +77,7 @@ Run the tripleo API:
 
 ```
 cd ~/tripleo-common
-tox -e venv  # Ignore errors
-source .tox/venv/bin/activate
-tripleo-api --config-file tripleo.conf
+tox -e venv -- tripleo-api --config-file tripleo.conf
 ```
 
 Run the validations API:
