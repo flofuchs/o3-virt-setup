@@ -35,5 +35,12 @@
   sudo: yes
 
 - name: Install tox
-  pip: name=tox
+  pip: name=tox state=latest
   sudo: yes
+
+# virtualenv bundles its own copy of pip and setuptools which are then used by
+# tox. Older versions wont work with some OpenStack requirements such as pbr.
+# If there is somehow a version of virtualenv installed already, the install of
+# tox above wont install the latest, so we ensure that here.
+- name: Update virtualenv
+  command: sudo pip install -IU virtualenv
