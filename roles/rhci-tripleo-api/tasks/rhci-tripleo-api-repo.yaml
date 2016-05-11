@@ -1,0 +1,6 @@
+- name: Clone tripleo-common repository
+  git: repo=http://git.app.eng.bos.redhat.com/git/rhci-tripleo-api.git
+       dest={{ rhci_tripleo_api_directory }}
+       update=no
+  become: yes
+  become_user: stack

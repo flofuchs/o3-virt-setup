@@ -1,0 +1,3 @@
+- include: rhci-tripleo-api-repo.yaml
+- include: tripleo-conf.yaml
+- include: rhci-tripleo-api-firewall.yaml

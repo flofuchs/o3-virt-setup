@@ -1,3 +1,1 @@
 - include: tripleo-common-repo.yaml
-- include: tripleo-conf.yaml
-- include: tripleo-api-firewall.yaml

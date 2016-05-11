@@ -4,6 +4,7 @@
 [undercloud:vars]
 # Destination directory of the tripleo-common repository.
 tripleo_common_directory=/home/stack/tripleo-common
+rhci_tripleo_api_directory=/home/stack/rhci-tripleo-api
 
 # Destination directory of the tripleo-ui repository.
 tripleo_ui_directory=/home/stack/tripleo-ui

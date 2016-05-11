@@ -14,16 +14,16 @@ OS.
 
 - Installs a set of common packages
 - Makes sure the `stack` user exists
-- Sets up tripleo-common including the temporary/unmerged tripleo-api patch
+- Sets up rhci-tripleo-api
+- Sets up tripleo-common including the initial mistral integration patch
 - Sets up the validations API
 - Sets up tripleo-ui
 - Adds cors settings for keystone and ironic
-- Opens API ports for tripleo-common/tripleo-ui/validations in iptables config
+- Opens API ports for rhci-tripleo-api/tripleo-ui/validations in iptables config
 
 
 ## TO DO
 
-- Add Mistral setup
 - Add Zaqar setup
 - Start APIs in screen or tmux sessions
 
@@ -76,7 +76,7 @@ windows, so it's advisable (but not required) to use tmux or screen.
 Run the tripleo API:
 
 ```
-cd ~/tripleo-common
+cd ~/rhci-tripleo-api
 tox -e venv  # Ignore errors
 source .tox/venv/bin/activate
 tripleo-api --config-file tripleo.conf

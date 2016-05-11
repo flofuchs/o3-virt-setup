@@ -3,5 +3,6 @@
 
   roles:
     - tripleo-common
+    - rhci-tripleo-api
     - validations
     - tripleo-ui

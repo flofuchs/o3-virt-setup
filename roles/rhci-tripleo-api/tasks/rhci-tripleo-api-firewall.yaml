@@ -1,5 +1,5 @@
 - name: Check firewall status for port 8585
-  shell: grep 8585 /etc/sysconfig/iptables | wc -l
+  shell: iptables -L INPUT | grep 8585 | grep "^ACCEPT" | wc -l
   sudo: yes
   register: iptables_tripleo_port
   ignore_errors: True
