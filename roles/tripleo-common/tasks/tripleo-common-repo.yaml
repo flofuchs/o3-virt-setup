@@ -6,7 +6,7 @@
   become_user: stack
 
 - name: Checkout patch "Initial Integration of Mistral into TripleO"
-  shell: git fetch ssh://flfuchs@review.openstack.org:29418/openstack/tripleo-common refs/changes/66/282366/29 && git checkout FETCH_HEAD
+  shell: git fetch https://review.openstack.org/openstack/tripleo-common refs/changes/66/282366/29 && git checkout FETCH_HEAD
   args:
     chdir: "{{ tripleo_common_directory }}"
     creates: "{{ tripleo_common_directory }}/tripleo_common/actions/__init__.py"

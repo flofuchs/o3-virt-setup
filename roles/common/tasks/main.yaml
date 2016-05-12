@@ -43,4 +43,5 @@
 # If there is somehow a version of virtualenv installed already, the install of
 # tox above wont install the latest, so we ensure that here.
 - name: Update virtualenv
-  command: sudo pip install -IU virtualenv
+  command: pip install -IU virtualenv
+  sudo: yes
