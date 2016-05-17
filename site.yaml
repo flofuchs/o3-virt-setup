@@ -3,6 +3,6 @@
 
   roles:
     - tripleo-common
-    - rhci-tripleo-api
+    - { role: rhci-tripleo-api, when: rhci_repo_url is defined }
     - validations
     - tripleo-ui

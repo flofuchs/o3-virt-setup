@@ -63,6 +63,12 @@ similar to this:
 <instack-ip>  ansible_ssh_user=root    ansible_ssh_private_key_file=/home/stack/.ssh/id_rsa
 ```
 
+If you want the RHCI API to be installed, add the repo url to the hosts file as well:
+
+```
+rhci_repo_url = <rhci_repo_url>
+```
+
 Run the playbook:
 
 ```
