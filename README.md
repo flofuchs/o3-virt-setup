@@ -43,7 +43,7 @@ So don't worry if there is no progress for a couple of minutes.
 Install Ansible:
 
 ```
-    sudo yum -y install ansible
+sudo yum -y install ansible
 ```
 
 Please do the following steps as the `stack` user on your **host** machine.
@@ -51,9 +51,9 @@ Please do the following steps as the `stack` user on your **host** machine.
 Check out this repository and create a hosts file:
 
 ```
-    git clone https://github.com/flofuchs/o3-virt-setup.git
-    cd o3-virt-setup
-    cp hosts.sample hosts
+git clone https://github.com/flofuchs/o3-virt-setup.git
+cd o3-virt-setup
+cp hosts.sample hosts
 ```
 
 In the `hosts` file add the correct values to the [undercloud] section,
@@ -66,7 +66,7 @@ similar to this:
 Run the playbook:
 
 ```
-    ansible-playbook -i hosts site.yaml
+ansible-playbook -i hosts site.yaml
 ```
 
 After the playbook run has completed, log into you undercloud and start
