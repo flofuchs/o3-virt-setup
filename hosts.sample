@@ -8,3 +8,6 @@ rhci_tripleo_api_directory=/home/stack/rhci-tripleo-api
 
 # Destination directory of the tripleo-ui repository.
 tripleo_ui_directory=/home/stack/tripleo-ui
+
+# RHCI repo url: Please set if you want the RHCI API to be installed.
+# rhci_repo_url = 
