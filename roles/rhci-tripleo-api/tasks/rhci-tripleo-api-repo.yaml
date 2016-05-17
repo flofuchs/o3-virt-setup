@@ -1,4 +1,4 @@
-- name: Clone tripleo-common repository
+- name: Clone rhci-tripleo-api repository
   git: repo={{ rhci_repo_url }}
        dest={{ rhci_tripleo_api_directory }}
        update=no
