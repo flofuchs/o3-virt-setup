@@ -17,6 +17,8 @@
   become_user: stack
 
 - name: Install undercloud (this will take a while!)
+  environment: 
+        DIB_INSTALLTYPE_puppet_modules: package
   shell: openstack undercloud install
   when: stackrc.stat.exists == false
   become: yes
