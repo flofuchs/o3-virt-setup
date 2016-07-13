@@ -11,3 +11,8 @@ tripleo_ui_directory=/home/stack/tripleo-ui
 
 # RHCI repo url: Please set if you want the RHCI API to be installed.
 # rhci_repo_url = 
+
+# Set DIB_INSTALLTYPE_puppet_modules env var.
+# Values can be "package" or "source"
+dib_install_type_puppet_modules = package
+
