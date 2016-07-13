@@ -18,7 +18,7 @@
 
 - name: Install undercloud (this will take a while!)
   environment: 
-        DIB_INSTALLTYPE_puppet_modules: package
+    DIB_INSTALLTYPE_puppet_modules: {{ dib_install_type_puppet_modules }}
   shell: openstack undercloud install
   when: stackrc.stat.exists == false
   become: yes
