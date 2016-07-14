@@ -50,3 +50,11 @@
 - name: Restart heat api 
   service: name=openstack-heat-api state=restarted
   sudo: yes
+  
+- name: Set cors allowed_origin in /etc/mistral/mistral.conf
+  ini_file: dest="/etc/mistral/mistral.conf" section=cors option=allowed_origin value=* backup=yes
+  sudo: yes
+  
+- name: Restart mistral api 
+  service: name=openstack-mistral-api state=restarted
+  sudo: yes
