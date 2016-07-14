@@ -2,6 +2,7 @@
   git: repo=https://github.com/rthallisey/clapper.git
        dest=/home/stack/clapper
        update=no
+       version=ansible1.9
   become: yes
   become_user: stack
 
