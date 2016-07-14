@@ -60,3 +60,11 @@
 - name: Restart mistral api 
   service: name=openstack-mistral-api state=restarted
   sudo: yes
+  
+- name: Set cors_allow_origin in /etc/swift/proxy-server.conf
+  ini_file: dest="/etc/swift/proxy-server.conf" section=DEFAULT option=cors_allow_origin value=* backup=yes
+  sudo: yes
+  
+- name: Restart swift proxy 
+  service: name=openstack-swift-proxy state=restarted
+  sudo: yes
