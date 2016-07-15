@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Enable last known good RDO Trunk Delorean repository for core openstack packages
-curl -o /etc/yum.repos.d/delorean.repo http://trunk.rdoproject.org/centos7/current-tripleo/delorean.repo
+curl -o /etc/yum.repos.d/delorean.repo http://buildlogs.centos.org/centos/7/cloud/x86_64/rdo-trunk-master-tripleo//delorean.repo
 
 # Enable latest RDO Trunk Delorean repository only for the TripleO packages
 curl -o /etc/yum.repos.d/delorean-current.repo http://trunk.rdoproject.org/centos7/current/delorean.repo
