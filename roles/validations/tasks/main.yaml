@@ -6,6 +6,10 @@
   become: yes
   become_user: stack
 
+- name: Install python-devel
+  yum: name=python-devel state=latest
+  sudo: yes
+
 - name: Install requirements
   pip: requirements=/home/stack/clapper/ansible-tests/requirements.txt virtualenv=/home/stack/clapper/ansible-tests/.venv
   become: yes
