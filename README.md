@@ -88,6 +88,8 @@ tox -e venv -- tripleo-api --config-file tripleo.conf
 
 Run the validations API:
 ```
+#you may need python-devel
+sudo yum -y install python-devel
 cd ~/clapper/ansible-tests
 source .venv/bin/activate
 source ~/stackrc
