@@ -97,5 +97,5 @@ source ~/stackrc
 Run the UI:
 ```
 cd ~/tripleo-ui
-gulp
+npm start
 ```
