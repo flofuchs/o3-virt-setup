@@ -1,1 +1,125 @@
-- include: tripleo-common-repo.yaml
+- name: Clone tripleo-common repository
+  git: repo=https://git.openstack.org/openstack/tripleo-common
+       dest=/home/stack/tripleo-common
+       update=no
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Remove existing tripleo-common installation
+  shell: rm -Rf /usr/lib/python2.7/site-packages/tripleo_common*
+  sudo: yes
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Install tripleo-common from source
+  shell: python setup.py install
+  args:
+    chdir: /home/stack/tripleo-common
+  sudo: yes
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Restart systemctl restart openstack-mistral-executor
+  shell: systemctl restart openstack-mistral-executor
+  sudo: yes
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Restart systemctl restart openstack-mistral-engine
+  shell: systemctl restart openstack-mistral-engine
+  sudo: yes
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Populate mistral db
+  shell: mistral-db-manage populate
+  sudo: yes
+  tags:
+    - tripleo-common
+    - tripleo-common-update
+
+- name: Check plan_management workbook
+  shell: source ~/stackrc && mistral workbook-list | grep tripleo.plan_management.v1 | wc -l
+  register: plan_management_playbook_exists
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Create plan_management workbook
+  shell: source ~/stackrc && mistral workbook-create /home/stack/tripleo-common/workbooks/plan_management.yaml
+  when: plan_management_playbook_exists.stdout == "0"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Update plan_management workbook
+  shell: source ~/stackrc && mistral workbook-update /home/stack/tripleo-common/workbooks/plan_management.yaml
+  when: plan_management_playbook_exists.stdout == "1"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Check baremetal workbook
+  shell: source ~/stackrc && mistral workbook-list | grep tripleo.baremetal.v1 | wc -l
+  register: baremetal_playbook_exists
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Create baremetal workbook
+  shell: source ~/stackrc && mistral workbook-create /home/stack/tripleo-common/workbooks/baremetal.yaml
+  when: baremetal_playbook_exists.stdout == "0"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Update baremetal workbook
+  shell: source ~/stackrc && mistral workbook-update /home/stack/tripleo-common/workbooks/baremetal.yaml
+  when: baremetal_playbook_exists.stdout == "1"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Check deployment workbook
+  shell: source ~/stackrc && mistral workbook-list | grep tripleo.deployment.v1 | wc -l
+  register: deployment_playbook_exists
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Create deployment workbook
+  shell: source ~/stackrc && mistral workbook-create /home/stack/tripleo-common/workbooks/deployment.yaml
+  when: deployment_playbook_exists.stdout == "0"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
+
+- name: Update deployment workbook
+  shell: source ~/stackrc && mistral workbook-update /home/stack/tripleo-common/workbooks/deployment.yaml
+  when: deployment_playbook_exists.stdout == "1"
+  args:
+    executable: /bin/bash
+  tags:
+    - tripleo-common
+    - tripleo-workbooks
