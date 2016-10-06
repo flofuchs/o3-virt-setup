@@ -16,6 +16,11 @@
   become: yes
   become_user: stack
 
+- name: Set enable_validations in /home/stack/undercloud.conf
+  ini_file: dest="/home/stack/undercloud.conf" section=DEFAULT option=enable_validations value=true backup=yes
+  become: yes
+  become_user: stack
+
 - name: Install undercloud (this will take a while!)
   environment: 
     DIB_INSTALLTYPE_puppet_modules: "{{ dib_install_type_puppet_modules }}"
