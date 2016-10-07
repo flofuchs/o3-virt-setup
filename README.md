@@ -16,10 +16,8 @@ OS.
 - Makes sure the `stack` user exists
 - Sets up rhci-tripleo-api
 - Sets up tripleo-common including the initial mistral integration patch
-- Sets up the validations API
 - Sets up tripleo-ui
 - Adds cors settings for keystone and ironic
-- Opens API ports for rhci-tripleo-api/tripleo-ui/validations in iptables config
 
 
 ## TO DO
@@ -84,14 +82,6 @@ Run the tripleo API:
 ```
 cd ~/rhci-tripleo-api
 tox -e venv -- tripleo-api --config-file tripleo.conf
-```
-
-Run the validations API:
-```
-cd ~/clapper/ansible-tests
-source .venv/bin/activate
-source ~/stackrc
-./validation-api.py
 ```
 
 Run the UI:
